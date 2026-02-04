@@ -42,7 +42,7 @@ public class GamePlay : BasePanel {
 
 	void ShowMyAd()
 	{
-		MRUtilities.Instance.ShowInterstitialAd();
+		// MRUtilities.Instance.ShowInterstitialAd();
 	}
 
 	void applyGameStateOnDecorationList(ref GameObject [] gameObjects,LockUnlockItems[] dataArray)
@@ -79,7 +79,7 @@ public class GamePlay : BasePanel {
 		itemToUnlock = item.GetComponent<LockUnlockItems>();
 		if(itemToUnlock.isLocked)
 		{
-			MRUtilities.Instance.ShowVideoAd(RewardUser,null);
+			// MRUtilities.Instance.ShowVideoAd(RewardUser,null);
 		}
 		else
 		{
@@ -98,7 +98,7 @@ public class GamePlay : BasePanel {
 		itemToUnlock = item.GetComponent<LockUnlockItems>();
 		if(itemToUnlock.isLocked)
 		{
-			MRUtilities.Instance.ShowVideoAd(RewardUser,null);
+			// MRUtilities.Instance.ShowVideoAd(RewardUser,null);
 		}
 		else
 		{
@@ -117,7 +117,7 @@ public class GamePlay : BasePanel {
 		itemToUnlock = item.GetComponent<LockUnlockItems>();
 		if(itemToUnlock.isLocked)
 		{
-			MRUtilities.Instance.ShowVideoAd(RewardUser,null);
+			// MRUtilities.Instance.ShowVideoAd(RewardUser,null);
 		}
 		else
 		{
@@ -133,7 +133,7 @@ public class GamePlay : BasePanel {
 		itemToUnlock = item.GetComponent<LockUnlockItems>();
 		if(itemToUnlock.isLocked)
 		{
-			MRUtilities.Instance.ShowVideoAd(RewardUser,null);
+			// MRUtilities.Instance.ShowVideoAd(RewardUser,null);
 		}
 		else
 		{
@@ -149,7 +149,7 @@ public class GamePlay : BasePanel {
 		itemToUnlock = item.GetComponent<LockUnlockItems>();
 		if(itemToUnlock.isLocked)
 		{
-			MRUtilities.Instance.ShowVideoAd(RewardUser,null);
+			// MRUtilities.Instance.ShowVideoAd(RewardUser,null);
 		}
 		else
 		{
@@ -167,7 +167,7 @@ public class GamePlay : BasePanel {
 		itemToUnlock = item.GetComponent<LockUnlockItems>();
 		if(itemToUnlock.isLocked)
 		{
-			MRUtilities.Instance.ShowVideoAd(RewardUser,null);
+			// MRUtilities.Instance.ShowVideoAd(RewardUser,null);
 		}
 		else
 		{
@@ -187,7 +187,7 @@ public class GamePlay : BasePanel {
 		itemToUnlock = item.GetComponent<LockUnlockItems>();
 		if(itemToUnlock.isLocked)
 		{
-			MRUtilities.Instance.ShowVideoAd(RewardUser,null);
+			// MRUtilities.Instance.ShowVideoAd(RewardUser,null);
 		}
 		else
 		{
@@ -213,7 +213,7 @@ public class GamePlay : BasePanel {
 
 	void ShowAd()
 	{
-		MRUtilities.Instance.ShowInterstitialAd();
+		// MRUtilities.Instance.ShowInterstitialAd();
 	}
 
 	public void HomeBtnClicked()
