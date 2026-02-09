@@ -19,4 +19,14 @@ public class ProfileUiElement : MonoBehaviour
             totalValueText.text = value;
         }
     }
+
+    public int GetValue()
+    {
+        return int.Parse(totalValueText.text);
+    }
+
+    public void SetValue(int value)
+    {
+        totalValueText.text = value.ToString();
+    }
 }
