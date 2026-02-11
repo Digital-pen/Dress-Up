@@ -16,12 +16,15 @@ public class ProfileUIController : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button saveButton;
     [SerializeField] private Button loadButton;
+    [SerializeField] private Button deleteButton;
+
 
     [Header("Testing")]
     [SerializeField] private bool simulateEndOfMonth = false; // For testing purposes
     [SerializeField] private bool resetData = false; // For testing purposes
 
-    private MyModuleBindings myModuleBindings;
+    // SERVER COMMUNICATION
+    private PlayerDataServiceBindings bindings;
 
 
 
@@ -29,83 +32,37 @@ public class ProfileUIController : MonoBehaviour
     {
         saveButton.interactable = false;
         loadButton.interactable = false;
+        deleteButton.interactable = false;
 
         await UnityServices.InitializeAsync();
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        bindings = new PlayerDataServiceBindings(CloudCodeService.Instance);
 
-        myModuleBindings = new MyModuleBindings(CloudCodeService.Instance);
-
-        await TalkToCloud();
+        await Load();
 
         saveButton.interactable = true;
         loadButton.interactable = true;
-    }
-
-    private async Task TalkToCloud()
-    {
-        var resultFromCloud = await myModuleBindings.SayHello("Hello from Unity!");
-        Debug.Log(resultFromCloud);
+        deleteButton.interactable = true;
     }
 
     #region Save and Load Methods
-
-
     public async void Save()
     {
-        if (resetData)
-        {
-            ProfileData resetData = new ProfileData { };
-            await SavePlayerData(resetData);
-            return;
-        }
-
-        if (simulateEndOfMonth)
-        {
-            ProfileData endOfMonthData = new ProfileData
-            {
-                totalScore = GetProfileDataValue(profileElements, ProfileDataType.TotalScore) + GetProfileDataValue(profileElements, ProfileDataType.MonthlyScore),
-                monthlyScore = 0, // Reset monthly score
-                totalBadgesEarned = GetProfileDataValue(profileElements, ProfileDataType.BadgesEarned),
-                savedStylesThisMonth = GetProfileDataValue(profileElements, ProfileDataType.SavedStylesThisMonth)
-            };
-            await SavePlayerData(endOfMonthData);
-            return;
-        }
-
         ProfileData data = new ProfileData
         {
-            totalScore = GetProfileDataValue(profileElements, ProfileDataType.TotalScore),
-            monthlyScore = GetProfileDataValue(profileElements, ProfileDataType.MonthlyScore),
-            totalBadgesEarned = GetProfileDataValue(profileElements, ProfileDataType.BadgesEarned),
-            savedStylesThisMonth = GetProfileDataValue(profileElements, ProfileDataType.SavedStylesThisMonth)
+            TotalScore = GetProfileDataValue(profileElements, ProfileDataType.TotalScore),
+            MonthlyScore = GetProfileDataValue(profileElements, ProfileDataType.MonthlyScore),
+            TotalBadgesEarned = GetProfileDataValue(profileElements, ProfileDataType.BadgesEarned),
+            SavedStylesThisMonth = GetProfileDataValue(profileElements, ProfileDataType.SavedStylesThisMonth)
         };
 
-        await SavePlayerData(data);
+        await bindings.SaveProfileData(ProfileDataConverter.ToServerProfile(data));
     }
 
-    private async Task SavePlayerData(ProfileData data)
+    public async Task Load()
     {
-        string jsonData = JsonUtility.ToJson(data);
-
-        var saveData = new Dictionary<string, object>
-        {
-            { "profileData", jsonData }
-        };
-
-        try
-        {
-            await CloudSaveService.Instance.Data.Player.SaveAsync(saveData);
-            Debug.Log("Data saved successfully!");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Failed to save: " + e.Message);
-        }
-    }
-
-    public async void Load()
-    {
-        ProfileData loadedData = await LoadPlayerData();
+        var resultFromCloud = await bindings.GetOrCreateProfileData();
+        ProfileData loadedData = ProfileDataConverter.ToClientProfile(resultFromCloud);
 
         if (loadedData != null)
         {
@@ -114,43 +71,26 @@ public class ProfileUIController : MonoBehaviour
                 switch (element.dataType)
                 {
                     case ProfileDataType.TotalScore:
-                        element.SetValue(loadedData.totalScore);
+                        element.SetValue(loadedData.TotalScore);
                         break;
                     case ProfileDataType.MonthlyScore:
-                        element.SetValue(loadedData.monthlyScore);
+                        element.SetValue(loadedData.MonthlyScore);
                         break;
                     case ProfileDataType.BadgesEarned:
-                        element.SetValue(loadedData.totalBadgesEarned);
+                        element.SetValue(loadedData.TotalBadgesEarned);
                         break;
                     case ProfileDataType.SavedStylesThisMonth:
-                        element.SetValue(loadedData.savedStylesThisMonth);
+                        element.SetValue(loadedData.SavedStylesThisMonth);
                         break;
                 }
             }
         }
     }
 
-    private async Task<ProfileData> LoadPlayerData()
+    public async void DeleteProfile()
     {
-        try
-        {
-            var savedData = await CloudSaveService.Instance.Data.Player.LoadAsync(
-                new HashSet<string> { "profileData" }
-            );
-
-            if (savedData.TryGetValue("profileData", out var jsonString))
-            {
-                ProfileData data = JsonUtility.FromJson<ProfileData>(jsonString.Value.GetAsString());
-                Debug.Log("Data loaded successfully!");
-                return data;
-            }
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Failed to load: " + e.Message);
-        }
-
-        return null;
+        await bindings.DeletePlayerProfile();
+        Debug.Log("Profile deleted.");
     }
     #endregion
 

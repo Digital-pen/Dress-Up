@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CloudSaveManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+455f521271f2665d703fa312c0619edcfffccf66")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48d5f1006b42b9b0f84c9d3c4c6c0eb81e60ea3c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CloudSaveManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CloudSaveManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
