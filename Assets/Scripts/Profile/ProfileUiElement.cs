@@ -9,7 +9,8 @@ public class ProfileUiElement : MonoBehaviour
 
     private void Start()
     {
-        inputField.onValueChanged.AddListener(OnValueChanged);
+        if (inputField != null)
+            inputField.onValueChanged.AddListener(OnValueChanged);
     }
 
     private void OnValueChanged(string value)

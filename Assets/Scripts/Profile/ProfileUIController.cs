@@ -4,21 +4,74 @@ using Unity.Services.Authentication;
 using Unity.Services.CloudSave;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine.UI;
+using Unity.Services.CloudCode.GeneratedBindings;
+using System;
+using Unity.Services.CloudCode;
 
 public class ProfileUIController : MonoBehaviour
 {
     [SerializeField] private ProfileUiElement[] profileElements;
 
+    [Header("Buttons")]
+    [SerializeField] private Button saveButton;
+    [SerializeField] private Button loadButton;
+
+    [Header("Testing")]
+    [SerializeField] private bool simulateEndOfMonth = false; // For testing purposes
+    [SerializeField] private bool resetData = false; // For testing purposes
+
+    private MyModuleBindings myModuleBindings;
+
+
+
     private async void Awake()
     {
+        saveButton.interactable = false;
+        loadButton.interactable = false;
+
         await UnityServices.InitializeAsync();
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+        myModuleBindings = new MyModuleBindings(CloudCodeService.Instance);
+
+        await TalkToCloud();
+
+        saveButton.interactable = true;
+        loadButton.interactable = true;
+    }
+
+    private async Task TalkToCloud()
+    {
+        var resultFromCloud = await myModuleBindings.SayHello("Hello from Unity!");
+        Debug.Log(resultFromCloud);
     }
 
     #region Save and Load Methods
 
+
     public async void Save()
     {
+        if (resetData)
+        {
+            ProfileData resetData = new ProfileData { };
+            await SavePlayerData(resetData);
+            return;
+        }
+
+        if (simulateEndOfMonth)
+        {
+            ProfileData endOfMonthData = new ProfileData
+            {
+                totalScore = GetProfileDataValue(profileElements, ProfileDataType.TotalScore) + GetProfileDataValue(profileElements, ProfileDataType.MonthlyScore),
+                monthlyScore = 0, // Reset monthly score
+                totalBadgesEarned = GetProfileDataValue(profileElements, ProfileDataType.BadgesEarned),
+                savedStylesThisMonth = GetProfileDataValue(profileElements, ProfileDataType.SavedStylesThisMonth)
+            };
+            await SavePlayerData(endOfMonthData);
+            return;
+        }
+
         ProfileData data = new ProfileData
         {
             totalScore = GetProfileDataValue(profileElements, ProfileDataType.TotalScore),

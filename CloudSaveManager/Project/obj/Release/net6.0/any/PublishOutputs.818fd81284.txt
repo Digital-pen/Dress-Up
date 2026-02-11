@@ -1,0 +1,13 @@
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\CloudSaveManager.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\CloudSaveManager.deps.json
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\CloudSaveManager.pdb
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\Unity.Services.CloudCode.Apis.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\Unity.Services.CloudCode.Core.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\Google.Protobuf.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\Grpc.Core.Api.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\Grpc.Net.Client.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\Grpc.Net.Common.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\JsonSubTypes.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation-cross-platform\Newtonsoft.Json.dll

@@ -1,0 +1,13 @@
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\CloudSaveManager.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\CloudSaveManager.deps.json
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\CloudSaveManager.pdb
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\Unity.Services.CloudCode.Apis.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\Unity.Services.CloudCode.Core.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\Google.Protobuf.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\Grpc.Core.Api.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\Grpc.Net.Client.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\Grpc.Net.Common.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\JsonSubTypes.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\youss\AppData\Local\Temp\CloudSaveManager\module-compilation\Newtonsoft.Json.dll
