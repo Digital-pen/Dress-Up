@@ -23,13 +23,17 @@ public class ProfileUIController : MonoBehaviour
     [SerializeField] private bool simulateEndOfMonth = false; // For testing purposes
     [SerializeField] private bool resetData = false; // For testing purposes
 
+    [SerializeField] private GameObject profilePanel = null;
+
+
     // SERVER COMMUNICATION
     private PlayerDataServiceBindings bindings;
-
-
+    private LeaderboardUIController leaderboardUIController;
 
     private async void Awake()
     {
+        leaderboardUIController = GetComponent<LeaderboardUIController>();
+
         saveButton.interactable = false;
         loadButton.interactable = false;
         deleteButton.interactable = false;
@@ -57,6 +61,7 @@ public class ProfileUIController : MonoBehaviour
         };
 
         await bindings.SaveProfileData(ProfileDataConverter.ToServerProfile(data));
+        await leaderboardUIController.AddScoreAsync(LeaderboardUIController.leaderboardID, data.MonthlyScore);
     }
 
     public async Task Load()
@@ -107,6 +112,11 @@ public class ProfileUIController : MonoBehaviour
             }
         }
         return value;
+    }
+
+    public void ToggleProfilePanel()
+    {
+        profilePanel.SetActive(!profilePanel.activeSelf);
     }
     #endregion
 }
